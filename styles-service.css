@@ -1,0 +1,126 @@
+/* ====== Reset default styles ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ====== Body Styles ====== */
+body {
+    text-align: center;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    background-image: url('bgimage.png'); /* Use the background image from the main CSS */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: rgb(223, 13, 30);
+}
+
+/* ====== Header Styles ====== */
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.nav-links a.active {
+    font-weight: bold;
+}
+
+/* Services Section Styles */
+.services {
+    padding: 100px 20px 40px;
+    text-align: left;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.services h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: rgb(224, 218, 219);
+}
+
+.services p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: rgb(224, 218, 219);
+}
+
+.service-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-box {
+    background-color: #f1e7e7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: rgb(224, 18, 53);
+}
+
+.service-box h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.service-box p {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 0;
+    text-align: left;
+    color: rgb(224, 18, 53);
+}
+
+/* ====== Footer Styles ====== */
+footer {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

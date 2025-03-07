@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Responsive Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html"><img src="logo-response3.png" alt="My Website Logo"></a>
+            <button class="menu-btn" onclick="toggleMenu()">&#9776;</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Welcome to My Website</h1>
+            <p>With just a few clicks, test your website's responsiveness like a pro.</p>
+        </section>
+    
+        <section class="tools">
+            <h2>Testing Tools</h2>
+            <h3>Use our tool to check website responsiveness.</h3>
+            <br>
+            <button class="btn" onclick="showDevices()">Test Now</button>
+        </section>
+    
+        <!-- Modal for device selection -->
+        <div id="deviceModal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeModal()">×</button>
+                <h2>Select a Device</h2>
+                <label for="urlInput">Enter URL:</label>
+                <input type="text" id="urlInput" placeholder="https://example.com">
+        
+                <!-- Orientation Buttons -->
+                <div class="orientation-buttons">
+                    <button id="portraitBtn" class="orientation active" onclick="setOrientation('portrait')">Portrait</button>
+                    <button id="landscapeBtn" class="orientation" onclick="setOrientation('landscape')">Landscape</button>
+                </div>
+        
+                <!-- Static Text -->
+                <p>Select Device</p>
+        
+                <!-- Device List -->
+                <div class="device-container">
+                    <div class="device-list">
+                        <ul id="deviceList">
+                            <li class="device all ios" data-width="393" data-height="852" onclick="simulateDevice(this)">📱 iPhone 16 (393x852 | iOS)</li>
+                            <li class="device all ios" data-width="430" data-height="932" onclick="simulateDevice(this)">📱 iPhone 16 Plus (430x932 | iOS)</li>
+                            <li class="device all ios" data-width="430" data-height="874" onclick="simulateDevice(this)">📱 iPhone 16 Pro (402x874| iOS)</li>
+                            <li class="device all ios" data-width="430" data-height="956" onclick="simulateDevice(this)">📱 iPhone 16 Pro Max (440x956| iOS)</li>
+                            <li class="device all ios" data-width="393" data-height="852" onclick="simulateDevice(this)">📱 iPhone 15 (393x852 | iOS)</li>
+                            <li class="device all ios" data-width="430" data-height="956" onclick="simulateDevice(this)">📱 iPhone 15 Plus (430x932 | iOS)</li>
+                            <li class="device all ios" data-width="393" data-height="852" onclick="simulateDevice(this)">📱 iPhone 15 Pro (393x852 | iOS)</li>
+                            <li class="device all ios" data-width="430" data-height="932" onclick="simulateDevice(this)">📱 iPhone 15 Pro Max (430x932 | iOS)</li>
+                            <li class="device all ios" data-width="390" data-height="844" onclick="simulateDevice(this)">📱 iPhone 14x (390x844 | iOS)</li>
+                            <li class="device all ios" data-width="428" data-height="926" onclick="simulateDevice(this)">📱 iPhone 14 Plus (428x926 | iOS)</li>
+                            <li class="device all ios" data-width="393" data-height="852" onclick="simulateDevice(this)">📱 iPhone 14 Pro (393x852 | iOS)</li>
+                            <li class="device all ios" data-width="430" data-height="932" onclick="simulateDevice(this)">📱 iPhone 14 Pro Max (430x932 | iOS)</li>
+                            <li class="device all ios" data-width="375" data-height="667" onclick="simulateDevice(this)">📱 iPhone SE 2022 (375x667 | iOS)</li>
+                            <li class="device all ios" data-width="375" data-height="812" onclick="simulateDevice(this)">📱 iPhone 13 Mini (375x812 | iOS)</li>
+                            <li class="device all ios" data-width="390" data-height="844" onclick="simulateDevice(this)">📱 iPhone 13 (390x844 | iOS)</li>
+                            <li class="device all ios" data-width="390" data-height="844" onclick="simulateDevice(this)">📱 iPhone 13 Pro (390x844 | iOS)</li>
+                            <li class="device all ios" data-width="428" data-height="926" onclick="simulateDevice(this)">📱 iPhone 13 Pro Max (428x926 | iOS)</li>
+                            <li class="device all ios" data-width="375" data-height="812" onclick="simulateDevice(this)">📱 iPhone 12 Mini (375x812 | iOS)</li>
+                            <li class="device all ios" data-width="390" data-height="844" onclick="simulateDevice(this)">📱 iPhone 12 (390x844 | iOS)</li>
+                            <li class="device all ios" data-width="390" data-height="844" onclick="simulateDevice(this)">📱 iPhone 12 Pro (390x844 | iOS)</li>
+                            <li class="device all ios" data-width="428" data-height="926" onclick="simulateDevice(this)">📱 iPhone 12 Pro Max (428x926 | iOS)</li>
+                            <li class="device all ios" data-width="414" data-height="896" onclick="simulateDevice(this)">📱 iPhone 11 (414x896 | iOS)</li>
+                            <li class="device all ios" data-width="375" data-height="812" onclick="simulateDevice(this)">📱 iPhone 11 Pro (375x812 | iOS)</li>
+                            <li class="device all ios" data-width="414" data-height="896" onclick="simulateDevice(this)">📱 iPhone 11 Pro Max (414x896 | iOS)</li>
+                            <li class="device all ios" data-width="375" data-height="667" onclick="simulateDevice(this)">📱 iPhone SE 2020 (375x667 | iOS)</li>
+                            <li class="device all ios" data-width="375" data-height="812" onclick="simulateDevice(this)">📱 iPhone X (375x812 | iOS)</li>
+                            <li class="device all ios" data-width="414" data-height="856" onclick="simulateDevice(this)">📱 iPhone XR (414x896 | iOS)</li>
+                            <li class="device all ios" data-width="375" data-height="812" onclick="simulateDevice(this)">📱 iPhone XS (375x812 | iOS)</li>
+                            <li class="device all ios" data-width="414" data-height="736" onclick="simulateDevice(this)">📱 iPhone 8 Plus  (414x736 | iOS)</li>
+                            <li class="device all ios" data-width="414" data-height="896" onclick="simulateDevice(this)">📱 iPhone XS Max (414x896 | iOS)</li>
+                            <li class="device all ios" data-width="375" data-height="667" onclick="simulateDevice(this)">📱 iPhone 7 (375x667 | iOS)</li>
+                            <li class="device all ios" data-width="430" data-height="956" onclick="simulateDevice(this)">📱 iPhone 8  (375x667 | iOS)</li>
+                            <li class="device all ios" data-width="430" data-height="956" onclick="simulateDevice(this)">📱 iPhone 7 Plus (414x736 | iOS)</li>
+                            <!-- iPad -->
+                            <li class="device all ipad" data-width="768" data-height="1024" onclick="simulateDevice(this)">📱 iPad Mini 4 (768x1024 | iPadOS)</li>
+                            <li class="device all ipad" data-width="768" data-height="1024" onclick="simulateDevice(this)">📱 iPad Mini 4 (768x1024 | iPadOS)</li>
+                            <li class="device all ipad" data-width="810" data-height="1080" onclick="simulateDevice(this)">📱 iPad 10  (810x1080 | iPadOS)</li>
+                            <li class="device all ipad" data-width="768" data-height="1024" onclick="simulateDevice(this)">📱 iPad Pro 9 (768x1024 | iPadOS)</li>
+                            <li class="device all ipad" data-width="834" data-height="1112" onclick="simulateDevice(this)">📱 iPad Pro 10 (834x1112 | iPadOS)</li>
+                            <li class="device all ipad" data-width="1024" data-height="1366" onclick="simulateDevice(this)">📱 iPad Pro 12  (1024x1366 | iPadOS)</li>
+                            <li class="device all ipad" data-width="834" data-height="1194" onclick="simulateDevice(this)">📱 iPad Pro 11 (2021) ((2021) 834x1194 | iPadOS)</li>
+                            <li class="device all ipad" data-width="1024" data-height="1366" onclick="simulateDevice(this)">📱 iPad Pro 12 (2021)  (1024x1366 | iPadOS)</li>
+                            <!-- Android -->
+                            <li class="device all android" data-width="412" data-height="915" onclick="simulateDevice(this)">📱 Google Pixel 8 (412x915 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="915" onclick="simulateDevice(this)">📱 Google Pixel 8 (412x915 | Android)</li>
+                            <li class="device all android" data-width="448" data-height="998" onclick="simulateDevice(this)">📱 Google Pixel 8 Pro (448x998 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="915" onclick="simulateDevice(this)">📱 Google Pixel 7 (412x915 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="892" onclick="simulateDevice(this)">📱 Google Pixel 7 Pro (412x892 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="915" onclick="simulateDevice(this)">📱 Google Pixel 7a (412x915 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="892" onclick="simulateDevice(this)">📱 Google Pixel 6 Pro (412x892 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="915" onclick="simulateDevice(this)">📱 Google Pixel 6 (412x915 | Android)</li>
+                            <li class="device all android" data-width="393" data-height="851" onclick="simulateDevice(this)">📱 Google Pixel 5 (393x851 | Android)</li>
+                            <li class="device all android" data-width="393" data-height="830" onclick="simulateDevice(this)">📱 Google Pixel 4 (393x830 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="869" onclick="simulateDevice(this)">📱 Google Pixel 4 XL (412x869 | Android)</li>
+                            <li class="device all android" data-width="393" data-height="786" onclick="simulateDevice(this)">📱 Google Pixel 3 (393x786 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="846" onclick="simulateDevice(this)">📱 Google Pixel 3 XL (412x846 | Android)</li>
+                            <li class="device all android" data-width="393" data-height="808" onclick="simulateDevice(this)">📱 Google Pixel 3a (393x808 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="824" onclick="simulateDevice(this)">📱 Google Pixel 3a XL (412x824 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="732" onclick="simulateDevice(this)">📱 Google Pixel 2 (412x732 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="824" onclick="simulateDevice(this)">📱 Google Pixel 2 XL (412x824 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="732" onclick="simulateDevice(this)">📱 Google Pixel (412x732 | Android)</li>
+                            <li class="device all android" data-width="412" data-height="732" onclick="simulateDevice(this)">📱 Google Pixel XL (412x732 | Android)</li>
+                            <li class="device all desktop" data-width="1920" data-height="1080" onclick="simulateDevice(this)">📱 Desktop HIDPI (1920x1080 | Windows)</li>
+                            <li class="device all desktop" data-width="1440" data-height="900" onclick="simulateDevice(this)">📱 Desktop MDPI (1440x900 | Windows)</li>
+                            <li class="device all desktop" data-width="3840" data-height="2160" onclick="simulateDevice(this)">📱 Desktop 4K 1X Scale (3840x2160 | Windows)</li>
+                            <li class="device all desktop" data-width="3840" data-height="2160" onclick="simulateDevice(this)">📱 Desktop UHD (Ultra HD) (3840x2160 | Windows)</li>
+                            <li class="device all desktop" data-width="1920" data-height="1200" onclick="simulateDevice(this)">📱 Desktop WUXGA (1920x1200 | Windows)</li>
+                            <li class="device all desktop" data-width="1600" data-height="900" onclick="simulateDevice(this)">📱 Laptop-L (1600x900 | Windows)</li>
+                            <li class="device all desktop" data-width="1366" data-height="768" onclick="simulateDevice(this)">📱 Laptop-M (1366x768 | Windows)</li>
+                            <li class="device all desktop" data-width="1280" data-height="800" onclick="simulateDevice(this)">📱 Laptop-S (1280x800 | Windows)</li>
+                            <li class="device all desktop" data-width="1024" data-height="768" onclick="simulateDevice(this)">📱 Laptop-XS (1024x768 | Windows)</li>
+                            <li class="device all desktop" data-width="3200" data-height="1800" onclick="simulateDevice(this)">📱 iMac Pro Retina 5K 27" (3200x1800 | macOS)</li>
+                            <li class="device all desktop" data-width="2048" data-height="1152" onclick="simulateDevice(this)">📱 iMac Retina 4K 21.5" (2048x1152 | macOS)</li>
+                            <li class="device all desktop" data-width="2240" data-height="1260" onclick="simulateDevice(this)">📱 iMac Retina 4.5K 24" (2240x1260 | macOS)</li>
+                            <li class="device all desktop" data-width="2560" data-height="1440" onclick="simulateDevice(this)">📱 iMac Retina 2016 27" (2560x1440 | macOS)</li>
+                            <li class="device all desktop" data-width="1440" data-height="900" onclick="simulateDevice(this)">📱 MacBook Air (1440x900 | macOS)</li>
+                            <li class="device all desktop" data-width="2304" data-height="1440" onclick="simulateDevice(this)">📱 MacBook (2304x1440 | macOS)</li>
+                            <li class="device all desktop" data-width="1440" data-height="900" onclick="simulateDevice(this)">📱 MacBook Pro (1440x900 | macOS)</li>
+                            <li class="device all desktop" data-width="3072" data-height="1920" onclick="simulateDevice(this)">📱 MacBook Pro 16" Retina (3072x1920 | macOS)</li>
+                            <li class="device all desktop" data-width="3024" data-height="1964" onclick="simulateDevice(this)">📱 MacBook Pro 14" Retina (3024x1964 | macOS)</li>
+                            <li class="device all desktop" data-width="2560" data-height="1600" onclick="simulateDevice(this)">📱 MacBook Pro 13" Retina (2560x1600 | macOS)</li>
+                            <li class="device all desktop" data-width="5120" data-height="2880" onclick="simulateDevice(this)">📱 Mac Studio Display (5120x2880 | macOS)</li>
+                            <li class="device all desktop" data-width="1920" data-height="1080" onclick="simulateDevice(this)">📱 Mac Mini External Display (1920x1080 | macOS)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Responsive Website</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

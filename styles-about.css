@@ -1,0 +1,127 @@
+/* ====== Reset default styles ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ====== Body Styles ====== */
+body {
+    text-align: left;
+    line-height: 1.6;
+    background-color: #e4f0e8;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: rgb(30, 30, 30);
+}
+
+/* ====== Header Styles ====== */
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.nav-links a.active {
+    font-weight: bold;
+}
+
+/* ====== About Section Layout ====== */
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 100px auto 40px;
+    padding: 20px;
+}
+
+/* About Text Section */
+.about {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.about h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.about h2 {
+    font-size: 24px;
+    margin-top: 20px;
+    background-color: rgb(206, 194, 178);
+    padding: 5px;
+}
+
+.about p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    background-color: rgb(206, 194, 178);
+    padding: 5px;
+}
+
+.about ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+/* About Image Section */
+.aboutusimage {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboutusimage img {
+    max-width: 100%;
+    width: 500px; /* Increased image size */
+    height: auto;
+    border-radius: 8px;
+}
+
+/* ====== Footer Styles ====== */
+footer {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

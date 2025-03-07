@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - My Responsive Website</title>
+    <link rel="stylesheet" href="style-contact.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="logo-response3.png" alt="My Website Logo"></a>
+            <!-- <button class="menu-btn" onclick="toggleMenu()">☰</button> -->
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+
+    <main>
+        <section class="contact">
+            <h1>Contact Us</h1>
+            <p>Have any questions or feedback? Fill out the form below, and we'll get back to you soon.</p>
+
+            <form action="send_email.php" method="POST">
+                
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Your Message</label>
+                <textarea id="message" placeholder="Contact page under development - Mails won't go" rows="5" required></textarea>
+                
+                
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Website | Let's Connect</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
