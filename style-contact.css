@@ -11,7 +11,7 @@ body {
     text-align: center;
     line-height: 1.6;
     background-color: #f8f9fa;
-    background-image: url('bgimage.png');
+    /* background-image: url('bgimage.png'); */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -21,7 +21,7 @@ body {
 
 /* ====== Header Styles ====== */
 header {
-    background-color: #007bff;
+    background: #505050;
     color: white;
     padding: 15px 0;
     position: fixed;
