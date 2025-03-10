@@ -9,36 +9,64 @@
 /* ====== Body Styles ====== */
 body {
     text-align: center;
-    line-height: 1.6;
-    background-color: #f8f9fa;
-    background-image: url('bgimage.png'); /* Use the background image from the main CSS */
+    background: url('bgimagenew.jpeg') no-repeat center center fixed; /* Background image added */
     background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: rgb(223, 13, 30);
+    color: rgb(233, 227, 228);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
+/* ====== Content Wrapper ====== */
+/* .content-wrapper {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    margin: auto;
+    flex: 1;
+} */
 
 /* ====== Header Styles ====== */
 header {
-    background-color: #007bff;
-    color: white;
-    padding: 15px 0;
-    position: fixed;
+   background: #505050;
+    border-bottom: 3px solid #e8491d;
+    /* color: white; */
+    padding: 15px 20px;
+    /* position: fixed; */
     width: 100%;
     top: 0;
     z-index: 1000;
-}
-
-nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    justify-content: flex-end; /* Moves content to the right */
 }
 
-.logo {
+/* Logo */
+.logo a {
     font-size: 24px;
     font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Aligns navigation to the right */
+    width: auto;
+}
+
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
 }
 
 .nav-links {
@@ -55,36 +83,42 @@ nav {
     color: white;
     font-size: 18px;
     padding: 10px;
+    transition: 0.3s ease-in-out;
 }
 
 .nav-links a:hover {
     text-decoration: underline;
+    color: #e81d1d;
 }
 
 .nav-links a.active {
     font-weight: bold;
 }
 
-/* Services Section Styles */
+/* ====== Services Section ====== */
 .services {
-    padding: 100px 20px 40px;
+    padding: 120px 2px 40px;
     text-align: left;
     max-width: 1000px;
     margin: 0 auto;
+    max-width: 2000px;
+    margin: 125px auto 45px;
+    background: rgba(0, 0, 0, 0.6);
+    
 }
 
 .services h1 {
     font-size: 36px;
     margin-bottom: 20px;
     text-align: center;
-    color: rgb(224, 218, 219);
+    color: rgb(233, 224, 225);
 }
 
 .services p {
     font-size: 18px;
     margin-bottom: 30px;
     text-align: center;
-    color: rgb(224, 218, 219);
+    color: rgb(240, 228, 230);
 }
 
 .service-list {
@@ -94,11 +128,16 @@ nav {
 }
 
 .service-box {
-    background-color: #f1e7e7;
-    padding: 20px;
+    /* background-color: rgba(241, 231, 231, 0.9); */
+    /* padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     color: rgb(224, 18, 53);
+    transition: 0.3s ease-in-out; */
+}
+
+.service-box:hover {
+    transform: scale(1.05);
 }
 
 .service-box h2 {
@@ -111,16 +150,43 @@ nav {
     line-height: 1.4;
     margin-bottom: 0;
     text-align: left;
-    color: rgb(224, 18, 53);
+    color: rgb(231, 222, 223);
 }
 
 /* ====== Footer Styles ====== */
 footer {
-    background-color: #007bff;
+    background: rgba(80, 80, 80, 0.9);
     color: white;
-    padding: 10px;
+    padding: 25px;
     text-align: center;
-    position: fixed;
-    bottom: 0;
+    margin-top: auto;
     width: 100%;
+}
+
+/* ====== Mobile Navigation ====== */
+@media screen and (max-width: 768px) {
+    .menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        width: 200px;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
 }
