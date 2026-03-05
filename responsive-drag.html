@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive Drag Live</title>
+  <style>
+    body {
+      background: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .drag-preview-container {
+      margin-top: 20px;
+      position: relative;
+      background: #111;
+      border-radius: 16px;
+      box-shadow: 0 0 16px #000a;
+      min-width: 320px;
+      min-height: 320px;
+      max-width: calc(100vw - 80px);
+      max-height: calc(100vh - 120px); /* leave space for footer */
+      overflow: hidden;
+    }
+
+    .drag-iframe {
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 0 8px #0006;
+    }
+
+    .drag-handle {
+      position: absolute;
+      background: #e8491d;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.2s;
+      user-select: none;
+      border: 2px solid #fff;
+      box-shadow: 0 0 4px #000a;
+    }
+
+    .drag-handle:hover {
+      background: #c73815;
+    }
+
+    .drag-handle-vertical {
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%);
+    }
+
+    .drag-handle-horizontal {
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+    }
+
+    /* Fixed footer */
+    .footer-controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #111;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 -2px 8px #000a;
+    }
+
+    .resolution-indicator {
+      font-size: 1.1em;
+      color: #ffb347;
+      background: #222;
+      padding: 6px 16px;
+      border-radius: 8px;
+      box-shadow: 0 0 4px #000a;
+    }
+
+    .custom-resolution {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: #222;
+      padding: 8px 12px;
+      border-radius: 8px;
+      box-shadow: 0 0 4px #000a;
+    }
+
+    .custom-resolution input {
+      width: 80px;
+      padding: 4px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .custom-resolution button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #e8491d;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .custom-resolution button:hover {
+      background: #c73815;
+    }
+
+    .live-button-container button {
+      padding: 8px 16px;
+      font-size: 1em;
+      background-color: #e8491d;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .live-button-container button:hover {
+      background-color: #c73815;
+    }
+  </style>
+</head>
+<body>
+  <!-- Drag Preview Container -->
+  <div class="drag-preview-container" id="dragContainer">
+    <iframe id="dragIframe" class="drag-iframe" src=""></iframe>
+
+    <div class="drag-handle drag-handle-vertical" id="verticalHandle" title="Drag vertically">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+        <path d="M12 4v16m0 0l-4-4m4 4l4-4m-4-12l-4 4m4-4l4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="drag-handle drag-handle-horizontal" id="horizontalHandle" title="Drag horizontally">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+        <path d="M4 12h16m0 0l-4-4m4 4l-4 4m-12-4l4-4m-4 4l4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Fixed Footer Controls -->
+  <div class="footer-controls">
+    <div class="resolution-indicator" id="resolutionIndicator">– × –</div>
+
+    <div class="custom-resolution">
+      <label for="customWidth">Width:</label>
+      <input type="number" id="customWidth" placeholder="e.g. 1280">
+      <label for="customHeight">Height:</label>
+      <input type="number" id="customHeight" placeholder="e.g. 800">
+      <button onclick="applyCustomResolution()">Apply</button>
+    </div>
+
+    <div class="live-button-container">
+      <button onclick="openLiveMode()">Open in Live Mode</button>
+    </div>
+  </div>
+
+  <script src="responsive-drag.js"></script>
+</body>
+</html>

@@ -1,243 +1,985 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitMyScreen</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FitMyScreen</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header>
-        <nav>
-            <!-- <div class="logo">FitMyScreen</div> -->
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <!-- <li><a href="contact.html">Contact</a></li> -->
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="hero">
-            <h1>Welcome to FitMyScreen  Testing Tool</h1>
+  <header>
+    <nav>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle navigation menu">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+      </ul>
+    </nav>
+  </header>
 
-            <h2>Test your website’s responsiveness like a pro with just a few clicks</h2>
-        </section>
+  <main>
+    <section class="hero">
+      <h1>Welcome to FitMyScreen Testing Tool</h1>
+      <h2>Test your website’s responsiveness like a pro with just a few clicks</h2>
+    </section>
 
-        <section class="tools">
-            <h2>Testing Tools</h2>
-            <h3>Use FitMyScreen to effortlessly test your website’s responsiveness on different devices</h3>
-            <h4>🖱️ Click the Start Button and proceed to the device page </p>
-          
-            <button class="btn" onclick="showDevices()">Start</button>
+    <section class="tools">
+      <h2>Testing Tools</h2>
+      <h3>Use FitMyScreen to effortlessly test your website’s responsiveness on different devices</h3>
+      <h4>🖱️ Click the Start Button and proceed to the device page</h4>
+      <button class="btn" onclick="showDevices()">Start</button>
+    </section>
 
-        </section>
+    <!-- Modal -->
+    <div id="deviceModal" class="modal" aria-hidden="true" role="dialog" aria-label="Device selection modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Select a Device</h2>
+          <button class="close-modal" onclick="closeModal()" aria-label="Close modal">×</button>
+        </div>
 
-        <!-- Modal for device selection -->
-        <div id="deviceModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Select a Device</h2>
-                    <button class="close-modal" onclick="closeModal()">×</button>
-                </div>
+        <!-- URL Input -->
+        <label for="urlInput">Enter URL:</label>
+        <input type="text" id="urlInput" class="modal-input" placeholder="https://example.com" inputmode="url">
 
-                <!-- URL Input -->
-                <label for="urlInput">Enter URL:</label>
-                <input type="text" id="urlInput" class="modal-input" placeholder="https://example.com">
-                <!-- Search Input -->
-                <label for="deviceSearch">Search Device:</label>
-                <input type="text" id="deviceSearch" onkeyup="searchDevices()" class="modal-input"
-                    placeholder="Search for a device...">
+        <!-- Search Input -->
+        <label for="deviceSearch">Search Device:</label>
+        <input type="text" id="deviceSearch" onkeyup="searchDevices()" class="modal-input" placeholder="Search for a device...">
 
-                <!-- Orientation Buttons -->
-                <div class="orientation-buttons">
-                    <button id="portraitBtn" class="orientation active" onclick="setOrientation('portrait')">Portrait</button>
-                    <button id="landscapeBtn" class="orientation"onclick="setOrientation('landscape')">Landscape</button>
-                    <span class="info-icon">ℹ️
-                        <span class="tooltip">You have to reselect the device to apply device changes</span>
-                    </span>
-                </div>
+<!-- Tabs -->
+ <div class="tab">
+          <button class="tablinks active" onclick="filterDevices('all', this)">ALL</button>
+          <button class="tablinks" onclick="filterDevices('ios', this)">IOS</button>
+          <button class="tablinks" onclick="filterDevices('ipad', this)">IPAD</button>
+          <button class="tablinks" onclick="filterDevices('android', this)">Android</button>
+          <button class="tablinks" onclick="filterDevices('laptop', this)">Laptop</button>
+          <button class="tablinks" onclick="filterDevices('desktop', this)">Desktop</button>
+          <button class="tablinks" onclick="filterDevices('tv', this)">TV</button>
+          <button class="btn" onclick="openResponsiveDragPreview()">Responsive Drag Preview</button>
+        </div>
 
-                <!-- Tab Buttons -->
-                <div class="tab">
-                    <button class="tablinks" onclick="filterDevices('ios')">iOS</button>
-                    <button class="tablinks" onclick="filterDevices('ipad')">iPad</button>
-                    <button class="tablinks" onclick="filterDevices('android')">Android</button>
-                    <button class="tablinks" onclick="filterDevices('desktop')">Desktop</button>
-                </div>
 
-                <!-- Device List -->
-                <div class="device-container">
-                    <div class="device-list">
-                        <ul id="deviceList">
-                            <li class="device all ios" data-width="393" data-height="852"
-                                onclick="simulateDevice(this)">📱 iPhone 16 (393x852 | iOS)</li>
-                            <li class="device all ios" data-width="430" data-height="932"
-                                onclick="simulateDevice(this)">📱 iPhone 16 Plus (430x932 | iOS)</li>
-                            <li class="device all ios" data-width="430" data-height="874"
-                                onclick="simulateDevice(this)">📱 iPhone 16 Pro (402x874| iOS)</li>
-                            <li class="device all ios" data-width="430" data-height="956"
-                                onclick="simulateDevice(this)">📱 iPhone 16 Pro Max (440x956| iOS)</li>
-                            <li class="device all ios" data-width="393" data-height="852"
-                                onclick="simulateDevice(this)">📱 iPhone 15 (393x852 | iOS)</li>
-                            <li class="device all ios" data-width="430" data-height="956"
-                                onclick="simulateDevice(this)">📱 iPhone 15 Plus (430x932 | iOS)</li>
-                            <li class="device all ios" data-width="393" data-height="852"
-                                onclick="simulateDevice(this)">📱 iPhone 15 Pro (393x852 | iOS)</li>
-                            <li class="device all ios" data-width="430" data-height="932"
-                                onclick="simulateDevice(this)">📱 iPhone 15 Pro Max (430x932 | iOS)</li>
-                            <li class="device all ios" data-width="390" data-height="844"
-                                onclick="simulateDevice(this)">📱 iPhone 14x (390x844 | iOS)</li>
-                            <li class="device all ios" data-width="428" data-height="926"
-                                onclick="simulateDevice(this)">📱 iPhone 14 Plus (428x926 | iOS)</li>
-                            <li class="device all ios" data-width="393" data-height="852"
-                                onclick="simulateDevice(this)">📱 iPhone 14 Pro (393x852 | iOS)</li>
-                            <li class="device all ios" data-width="430" data-height="932"
-                                onclick="simulateDevice(this)">📱 iPhone 14 Pro Max (430x932 | iOS)</li>
-                            <li class="device all ios" data-width="375" data-height="667"
-                                onclick="simulateDevice(this)">📱 iPhone SE 2022 (375x667 | iOS)</li>
-                            <li class="device all ios" data-width="375" data-height="812"
-                                onclick="simulateDevice(this)">📱 iPhone 13 Mini (375x812 | iOS)</li>
-                            <li class="device all ios" data-width="390" data-height="844"
-                                onclick="simulateDevice(this)">📱 iPhone 13 (390x844 | iOS)</li>
-                            <li class="device all ios" data-width="390" data-height="844"
-                                onclick="simulateDevice(this)">📱 iPhone 13 Pro (390x844 | iOS)</li>
-                            <li class="device all ios" data-width="428" data-height="926"
-                                onclick="simulateDevice(this)">📱 iPhone 13 Pro Max (428x926 | iOS)</li>
-                            <li class="device all ios" data-width="375" data-height="812"
-                                onclick="simulateDevice(this)">📱 iPhone 12 Mini (375x812 | iOS)</li>
-                            <li class="device all ios" data-width="390" data-height="844"
-                                onclick="simulateDevice(this)">📱 iPhone 12 (390x844 | iOS)</li>
-                            <li class="device all ios" data-width="390" data-height="844"
-                                onclick="simulateDevice(this)">📱 iPhone 12 Pro (390x844 | iOS)</li>
-                            <li class="device all ios" data-width="428" data-height="926"
-                                onclick="simulateDevice(this)">📱 iPhone 12 Pro Max (428x926 | iOS)</li>
-                            <li class="device all ios" data-width="414" data-height="896"
-                                onclick="simulateDevice(this)">📱 iPhone 11 (414x896 | iOS)</li>
-                            <li class="device all ios" data-width="375" data-height="812"
-                                onclick="simulateDevice(this)">📱 iPhone 11 Pro (375x812 | iOS)</li>
-                            <li class="device all ios" data-width="414" data-height="896"
-                                onclick="simulateDevice(this)">📱 iPhone 11 Pro Max (414x896 | iOS)</li>
-                            <li class="device all ios" data-width="375" data-height="667"
-                                onclick="simulateDevice(this)">📱 iPhone SE 2020 (375x667 | iOS)</li>
-                            <li class="device all ios" data-width="375" data-height="812"
-                                onclick="simulateDevice(this)">📱 iPhone X (375x812 | iOS)</li>
-                            <li class="device all ios" data-width="414" data-height="856"
-                                onclick="simulateDevice(this)">📱 iPhone XR (414x896 | iOS)</li>
-                            <li class="device all ios" data-width="375" data-height="812"
-                                onclick="simulateDevice(this)">📱 iPhone XS (375x812 | iOS)</li>
-                            <li class="device all ios" data-width="414" data-height="736"
-                                onclick="simulateDevice(this)">📱 iPhone 8 Plus (414x736 | iOS)</li>
-                            <li class="device all ios" data-width="414" data-height="896"
-                                onclick="simulateDevice(this)">📱 iPhone XS Max (414x896 | iOS)</li>
-                            <li class="device all ios" data-width="375" data-height="667"
-                                onclick="simulateDevice(this)">📱 iPhone 7 (375x667 | iOS)</li>
-                            <li class="device all ios" data-width="430" data-height="956"
-                                onclick="simulateDevice(this)">📱 iPhone 8 (375x667 | iOS)</li>
-                            <li class="device all ios" data-width="430" data-height="956"
-                                onclick="simulateDevice(this)">📱 iPhone 7 Plus (414x736 | iOS)</li>
-                            <!-- iPad -->
-                            <li class="device all ipad" data-width="768" data-height="1024"
-                                onclick="simulateDevice(this)">📱 iPad Mini 4 (768x1024 | iPadOS)</li>
-                            <li class="device all ipad" data-width="768" data-height="1024"
-                                onclick="simulateDevice(this)">📱 iPad Mini 4 (768x1024 | iPadOS)</li>
-                            <li class="device all ipad" data-width="810" data-height="1080"
-                                onclick="simulateDevice(this)">📱 iPad 10 (810x1080 | iPadOS)</li>
-                            <li class="device all ipad" data-width="768" data-height="1024"
-                                onclick="simulateDevice(this)">📱 iPad Pro 9 (768x1024 | iPadOS)</li>
-                            <li class="device all ipad" data-width="834" data-height="1112"
-                                onclick="simulateDevice(this)">📱 iPad Pro 10 (834x1112 | iPadOS)</li>
-                            <li class="device all ipad" data-width="1024" data-height="1366"
-                                onclick="simulateDevice(this)">📱 iPad Pro 12 (1024x1366 | iPadOS)</li>
-                            <li class="device all ipad" data-width="834" data-height="1194"
-                                onclick="simulateDevice(this)">📱 iPad Pro 11 (2021) ((2021) 834x1194 | iPadOS)</li>
-                            <li class="device all ipad" data-width="1024" data-height="1366"
-                                onclick="simulateDevice(this)">📱 iPad Pro 12 (2021) (1024x1366 | iPadOS)</li>
-                            <!-- Android -->
-                            <li class="device all android" data-width="412" data-height="915"
-                                onclick="simulateDevice(this)">📱 Google Pixel 8 (412x915 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="915"
-                                onclick="simulateDevice(this)">📱 Google Pixel 8 (412x915 | Android)</li>
-                            <li class="device all android" data-width="448" data-height="998"
-                                onclick="simulateDevice(this)">📱 Google Pixel 8 Pro (448x998 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="915"
-                                onclick="simulateDevice(this)">📱 Google Pixel 7 (412x915 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="892"
-                                onclick="simulateDevice(this)">📱 Google Pixel 7 Pro (412x892 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="915"
-                                onclick="simulateDevice(this)">📱 Google Pixel 7a (412x915 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="892"
-                                onclick="simulateDevice(this)">📱 Google Pixel 6 Pro (412x892 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="915"
-                                onclick="simulateDevice(this)">📱 Google Pixel 6 (412x915 | Android)</li>
-                            <li class="device all android" data-width="393" data-height="851"
-                                onclick="simulateDevice(this)">📱 Google Pixel 5 (393x851 | Android)</li>
-                            <li class="device all android" data-width="393" data-height="830"
-                                onclick="simulateDevice(this)">📱 Google Pixel 4 (393x830 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="869"
-                                onclick="simulateDevice(this)">📱 Google Pixel 4 XL (412x869 | Android)</li>
-                            <li class="device all android" data-width="393" data-height="786"
-                                onclick="simulateDevice(this)">📱 Google Pixel 3 (393x786 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="846"
-                                onclick="simulateDevice(this)">📱 Google Pixel 3 XL (412x846 | Android)</li>
-                            <li class="device all android" data-width="393" data-height="808"
-                                onclick="simulateDevice(this)">📱 Google Pixel 3a (393x808 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="824"
-                                onclick="simulateDevice(this)">📱 Google Pixel 3a XL (412x824 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="732"
-                                onclick="simulateDevice(this)">📱 Google Pixel 2 (412x732 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="824"
-                                onclick="simulateDevice(this)">📱 Google Pixel 2 XL (412x824 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="732"
-                                onclick="simulateDevice(this)">📱 Google Pixel (412x732 | Android)</li>
-                            <li class="device all android" data-width="412" data-height="732"
-                                onclick="simulateDevice(this)">📱 Google Pixel XL (412x732 | Android)</li>
-                            <li class="device all desktop" data-width="1920" data-height="1080"
-                                onclick="simulateDevice(this)">💻 Desktop HIDPI (1920x1080 | Desktop)</li>
-                            <li class="device all desktop" data-width="1440" data-height="900"
-                                onclick="simulateDevice(this)">💻 Desktop MDPI (1440x900 | Desktop)</li>
-                            <li class="device all desktop" data-width="3840" data-height="2160"
-                                onclick="simulateDevice(this)">💻 Desktop 4K 1X Scale (3840x2160 | Desktop)</li>
-                            <li class="device all desktop" data-width="3840" data-height="2160"
-                                onclick="simulateDevice(this)">💻 Desktop UHD (Ultra HD) (3840x2160 | Desktop)</li>
-                            <li class="device all desktop" data-width="1920" data-height="1200"
-                                onclick="simulateDevice(this)">💻 Desktop WUXGA (1920x1200 | Desktop)</li>
-                            <li class="device all desktop" data-width="1600" data-height="900"
-                                onclick="simulateDevice(this)">💻 Laptop-L (1600x900 | Desktop)</li>
-                            <li class="device all desktop" data-width="1366" data-height="768"
-                                onclick="simulateDevice(this)">💻 Laptop-M (1366x768 | Desktop)</li>
-                            <li class="device all desktop" data-width="1280" data-height="800"
-                                onclick="simulateDevice(this)">💻 Laptop-S (1280x800 | Desktop)</li>
-                            <li class="device all desktop" data-width="1024" data-height="768"
-                                onclick="simulateDevice(this)">💻 Laptop-XS (1024x768 | Desktop)</li>
-                            <li class="device all desktop" data-width="3200" data-height="1800"
-                                onclick="simulateDevice(this)">💻 iMac Pro Retina 5K 27" (3200x1800 | Desktop)</li>
-                            <li class="device all desktop" data-width="2048" data-height="1152"
-                                onclick="simulateDevice(this)">💻 iMac Retina 4K 21.5" (2048x1152 | Desktop)</li>
-                            <li class="device all desktop" data-width="2240" data-height="1260"
-                                onclick="simulateDevice(this)">💻 iMac Retina 4.5K 24" (2240x1260 | Desktop)</li>
-                            <li class="device all desktop" data-width="2560" data-height="1440"
-                                onclick="simulateDevice(this)">💻 iMac Retina 2016 27" (2560x1440 | Desktop)</li>
-                            <li class="device all desktop" data-width="1440" data-height="900"
-                                onclick="simulateDevice(this)">💻 MacBook Air (1440x900 | Desktop)</li>
-                            <li class="device all desktop" data-width="2304" data-height="1440"
-                                onclick="simulateDevice(this)">💻 MacBook (2304x1440 | Desktop)</li>
-                            <li class="device all desktop" data-width="1440" data-height="900"
-                                onclick="simulateDevice(this)">💻 MacBook Pro (1440x900 | Desktop)</li>
-                            <li class="device all desktop" data-width="3072" data-height="1920"
-                                onclick="simulateDevice(this)">💻 MacBook Pro 16" Retina (3072x1920 | Desktop)</li>
-                            <li class="device all desktop" data-width="3024" data-height="1964"
-                                onclick="simulateDevice(this)">💻 MacBook Pro 14" Retina (3024x1964 | Desktop)</li>
-                            <li class="device all desktop" data-width="2560" data-height="1600"
-                                onclick="simulateDevice(this)">💻 MacBook Pro 13" Retina (2560x1600 | Desktop)</li>
-                            <li class="device all desktop" data-width="5120" data-height="2880"
-                                onclick="simulateDevice(this)">💻 Mac Studio Display (5120x2880 | Desktop)</li>
-                            <li class="device all desktop" data-width="1920" data-height="1080"
-                                onclick="simulateDevice(this)">💻 Mac Mini External Display (1920x1080 | Desktop)</li>
+
+        <!-- Orientation buttons (hidden via JS for desktop/tv) -->
+        <div class="orientation-buttons">
+          <button id="portraitBtn" class="orientation active" onclick="setOrientation('portrait')">Portrait</button>
+          <button id="landscapeBtn" class="orientation" onclick="setOrientation('landscape')">Landscape</button>
+          <span class="info-icon" title="Mobile & tablet can rotate; desktop & TV are fixed">
+            ⓘ
+            <span class="tooltip">Mobile & tablet can rotate; desktop & TV are fixed</span>
+          </span>
+        </div>
+<div class="Information_message">
+  <p>! Login and session features may not work in Preview mode. Use Interactive Mode for full testing</p>
+</div>
+
+
+
+
+        <!-- Device List -->
+        <div class="device-container">
+          <div class="device-list">
+            <ul id="deviceList">
+              <!-- iOS devices (already listed above) -->
+
+
+
+         
+<!-- 2007 -->
+<li class="device all ios" data-device="iphone2g" data-width="320" data-height="480">
+  📱 iPhone (Original, 2007) (320x480 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2008 -->
+<li class="device all ios" data-device="iphone3g" data-width="320" data-height="480">
+  📱 iPhone 3G (2008) (320x480 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2009 -->
+<li class="device all ios" data-device="iphone3gs" data-width="320" data-height="480">
+  📱 iPhone 3GS (2009) (320x480 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2010 -->
+<li class="device all ios" data-device="iphone4" data-width="640" data-height="960">
+  📱 iPhone 4 (2010) (320x480 @2x → 640x960 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2011 -->
+<li class="device all ios" data-device="iphone4s" data-width="640" data-height="960">
+  📱 iPhone 4S (2011) (640x960 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2012 -->
+<li class="device all ios" data-device="iphone5" data-width="640" data-height="1136">
+  📱 iPhone 5 (2012) (640x1136 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone5c" data-width="640" data-height="1136">
+  📱 iPhone 5C (2013) (640x1136 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone5s" data-width="640" data-height="1136">
+  📱 iPhone 5S (2013) (640x1136 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2014 -->
+<li class="device all ios" data-device="iphone6" data-width="375" data-height="667">
+  📱 iPhone 6 (2014) (375x667 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone6plus" data-width="414" data-height="736">
+  📱 iPhone 6 Plus (2014) (414x736 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2015 -->
+<li class="device all ios" data-device="iphone6s" data-width="375" data-height="667">
+  📱 iPhone 6S (2015) (375x667 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone6splus" data-width="414" data-height="736">
+  📱 iPhone 6S Plus (2015) (414x736 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2016 -->
+<li class="device all ios" data-device="iphonese2016" data-width="640" data-height="1136">
+  📱 iPhone SE (1st Gen, 2016) (640x1136 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- ----------------- -->
+<li class="device all ios" data-device="iphone7">
+  📱 iPhone 7 (2016) (375x667 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone7plus">
+  📱 iPhone 7 Plus (2016) (414x736 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2017 -->
+<li class="device all ios" data-device="iphone8">
+  📱 iPhone 8 (2017) (375x667 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone8plus">
+  📱 iPhone 8 Plus (2017) (414x736 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphonex">
+  📱 iPhone X (2017) (375x812 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2018 -->
+<li class="device all ios" data-device="iphonexs">
+  📱 iPhone XS (2018) (375x812 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphonexsmax">
+  📱 iPhone XS Max (2018) (414x896 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphonexr">
+  📱 iPhone XR (2018) (414x896 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+<!-- 2019 -->
+<li class="device all ios" data-device="iphone11">
+  📱 iPhone 11 (2019) (414x896 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone11pro">
+  📱 iPhone 11 Pro (2019) (375x812 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone11promax">
+  📱 iPhone 11 Pro Max (2019) (414x896 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2020 -->
+<li class="device all ios" data-device="iphonese2020">
+  📱 iPhone SE (2nd Gen, 2020) (375x667 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone12mini">
+  📱 iPhone 12 Mini (2020) (375x812 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone12">
+  📱 iPhone 12 (2020) (390x844 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone12pro">
+  📱 iPhone 12 Pro (2020) (390x844 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone12promax">
+  📱 iPhone 12 Pro Max (2020) (428x926 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2021 -->
+<li class="device all ios" data-device="iphone13mini">
+  📱 iPhone 13 Mini (2021) (375x812 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone13">
+  📱 iPhone 13 (2021) (390x844 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone13pro">
+  📱 iPhone 13 Pro (2021) (390x844 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone13promax">
+  📱 iPhone 13 Pro Max (2021) (428x926 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2022 -->
+<li class="device all ios" data-device="iphonese2022">
+  📱 iPhone SE (3rd Gen, 2022) (375x667 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone14">
+  📱 iPhone 14 (2022) (390x844 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone14plus">
+  📱 iPhone 14 Plus (2022) (428x926 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone14pro">
+  📱 iPhone 14 Pro (2022) (393x852 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone14promax">
+  📱 iPhone 14 Pro Max (2022) (430x932 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2023 -->
+<li class="device all ios" data-device="iphone15">
+  📱 iPhone 15 (2023) (393x852 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone15plus">
+  📱 iPhone 15 Plus (2023) (430x932 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone15pro">
+  📱 iPhone 15 Pro (2023) (393x852 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ios" data-device="iphone15promax">
+  📱 iPhone 15 Pro Max (2023) (430x932 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+<!-- 2024 -->
+<li class="device all ios" data-device="iphone16">
+  📱 iPhone 16 (2024) (390x844 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all ios" data-device="iphone16plus">
+  📱 iPhone 16 Plus (2024) (430x932 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all ios" data-device="iphone16pro">
+  📱 iPhone 16 Pro (2024) (402x874 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all ios" data-device="iphone16promax">
+  📱 iPhone 16 Pro Max (2024) (430x932 | iOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+              <!-- iPad -->
+<!-- 2010 -->
+<li class="device all ipad" data-device="ipad1">
+  📱 iPad (1st Gen, 2010) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2011 -->
+<li class="device all ipad" data-device="ipad2">
+  📱 iPad 2 (2011) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2012 -->
+<li class="device all ipad" data-device="ipad3">
+  📱 iPad 3 (2012) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipad4">
+  📱 iPad 4 (2012) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadmini1">
+  📱 iPad Mini (1st Gen, 2012) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2013 -->
+<li class="device all ipad" data-device="ipadair1">
+  📱 iPad Air (2013) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadmini2">
+  📱 iPad Mini 2 (2013) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2014 -->
+<li class="device all ipad" data-device="ipadair2">
+  📱 iPad Air 2 (2014) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadmini3">
+  📱 iPad Mini 3 (2014) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2015 -->
+<li class="device all ipad" data-device="ipadmini4">
+  📱 iPad Mini 4 (2015) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro12_2015">
+  📱 iPad Pro 12.9 (1st Gen, 2015) (1024x1366 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2016 -->
+<li class="device all ipad" data-device="ipadpro9_7">
+  📱 iPad Pro 9.7 (2016) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2017 -->
+<li class="device all ipad" data-device="ipad5">
+  📱 iPad (5th Gen, 2017) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro10_5">
+  📱 iPad Pro 10.5 (2017) (834x1112 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro12_2017">
+  📱 iPad Pro 12.9 (2nd Gen, 2017) (1024x1366 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2018 -->
+<li class="device all ipad" data-device="ipad6">
+  📱 iPad (6th Gen, 2018) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro11_2018">
+  📱 iPad Pro 11 (1st Gen, 2018) (834x1194 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro12_2018">
+  📱 iPad Pro 12.9 (3rd Gen, 2018) (1024x1366 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2019 -->
+<li class="device all ipad" data-device="ipad7">
+  📱 iPad (7th Gen, 2019) (810x1080 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadmini5">
+  📱 iPad Mini 5 (2019) (768x1024 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadair3">
+  📱 iPad Air 3 (2019) (834x1112 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<!-- 2020 -->
+<li class="device all ipad" data-device="ipad8">
+  📱 iPad (8th Gen, 2020) (810x1080 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro11_2020">
+  📱 iPad Pro 11 (2nd Gen, 2020) (834x1194 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro12_2020">
+  📱 iPad Pro 12.9 (4th Gen, 2020) (1024x1366 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2021 -->
+<li class="device all ipad" data-device="ipad9">
+  📱 iPad (9th Gen, 2021) (810x1080 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro11_2021">
+  📱 iPad Pro 11 (3rd Gen, 2021) (834x1194 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro12_2021">
+  📱 iPad Pro 12.9 (5th Gen, 2021) (1024x1366 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadair4">
+  📱 iPad Air 4 (2021) (820x1180 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2022 -->
+<li class="device all ipad" data-device="ipad10">
+  📱 iPad (10th Gen, 2022) (810x1080 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro11_2022">
+  📱 iPad Pro 11 (4th Gen, 2022) (834x1194 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro12_2022">
+  📱 iPad Pro 12.9 (6th Gen, 2022) (1024x1366 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadmini6">
+  📱 iPad Mini 6 (2022) (744x1133 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- 2024 -->
+<li class="device all ipad" data-device="ipadpro11_2024">
+  📱 iPad Pro 11" (M4, 2024) (834x1194 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadpro13_2024">
+  📱 iPad Pro 13" (M4, 2024) (1024x1366 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadair11_2024">
+  📱 iPad Air 11" (M2, 2024) (820x1180 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all ipad" data-device="ipadair13_2024">
+  📱 iPad Air 13" (M2, 2024) (1024x1366 | iPadOS)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+
+
+
+
+              <!-- Android -->
+<!-- Samsung Galaxy S Series -->
+<li class="device all android" data-device="galaxy_s24">
+  📱 Samsung Galaxy S24 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="galaxy_s24plus">
+  📱 Samsung Galaxy S24+ (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="galaxy_s24ultra">
+  📱 Samsung Galaxy S24 Ultra (480x1066 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="galaxy_s23">
+  📱 Samsung Galaxy S23 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="galaxy_s23plus">
+  📱 Samsung Galaxy S23+ (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="galaxy_s23ultra">
+  📱 Samsung Galaxy S23 Ultra (480x1066 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="galaxy_s22">
+  📱 Samsung Galaxy S22 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="galaxy_s21">
+  📱 Samsung Galaxy S21 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="galaxy_s20">
+  📱 Samsung Galaxy S20 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+
+<!-- Samsung Galaxy Note Series -->
+<li class="device all android" data-device="galaxy_note20">
+  📱 Samsung Galaxy Note 20 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="galaxy_note20ultra">
+  📱 Samsung Galaxy Note 20 Ultra (480x1066 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- Samsung Galaxy Foldables -->
+<li class="device all android" data-device="galaxy_zfold5">
+  📱 Samsung Galaxy Z Fold 5 (768x1040 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="galaxy_zflip5">
+  📱 Samsung Galaxy Z Flip 5 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- OnePlus -->
+<li class="device all android" data-device="oneplus12">
+  📱 OnePlus 12 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="oneplus11">
+  📱 OnePlus 11 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="oneplus10pro">
+  📱 OnePlus 10 Pro (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="oneplus9">
+  📱 OnePlus 9 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- Xiaomi / Redmi -->
+<li class="device all android" data-device="xiaomi_13">
+  📱 Xiaomi 13 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="xiaomi_12">
+  📱 Xiaomi 12 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="redmi_note12">
+  📱 Redmi Note 12 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="redmi_note11">
+  📱 Redmi Note 11 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- Oppo / Vivo -->
+<li class="device all android" data-device="oppo_findx6">
+  📱 Oppo Find X6 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="oppo_reno10">
+  📱 Oppo Reno 10 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="vivo_x90">
+  📱 Vivo X90 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="vivo_x80">
+  📱 Vivo X80 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- Google Pixel -->
+<li class="device all android" data-device="pixel8">
+  📱 Google Pixel 8 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="pixel8pro">
+  📱 Google Pixel 8 Pro (448x998 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="pixel7">
+  📱 Google Pixel 7 (412x915 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all android" data-device="pixel7pro">
+  📱 Google Pixel 7 Pro (412x892 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- Generic Android Test Sizes -->
+<li class="device all android" data-device="android_small">
+  📱 Generic Small Android (360x640 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="android_medium">
+  📱 Generic Medium Android (412x732 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="android_large">
+  📱 Generic Large Android (480x853 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all android" data-device="android_xlarge">
+  📱 Generic XL Android (600x960 | Android)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+
+
+
+
+              <!-- Desktop -->
+<li class="device all desktop" data-device="desktop_svga">
+  💻 SVGA (800x600 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_xga">
+  💻 XGA (1024x768 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_wxga">
+  💻 WXGA (1280x800 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_sxga">
+  💻 SXGA (1280x1024 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_hd">
+  💻 HD (1366x768 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_fhd">
+  💻 Full HD (1920x1080 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_wuxga">
+  💻 WUXGA (1920x1200 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_qhd">
+  💻 QHD (2560x1440 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_qhdplus">
+  💻 QHD+ (3200x1800 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_uhd">
+  💻 UHD 4K (3840x2160 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_5k">
+  💻 5K (5120x2880 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_8k">
+  💻 8K (7680x4320 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_ultrawide">
+  💻 Ultrawide QHD (3440x1440 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="desktop_superultrawide">
+  💻 Super Ultrawide (5120x1440 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="imac_retina_2016_27">
+  💻 iMac Retina 27" (2016) (2560x1440 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="imac_retina_4k_21_5">
+  💻 iMac Retina 21.5" 4K (2048x1152 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="imac_retina_4_5k_24">
+  💻 iMac Retina 24" 4.5K (2240x1260 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="imac_pro_retina_5k_27">
+  💻 iMac Pro Retina 27" 5K (3200x1800 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="mac_studio_display">
+  💻 Mac Studio Display (5120x2880 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="mac_pro_display_xdr">
+  💻 Pro Display XDR (6016x3384 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all desktop" data-device="mac_mini_external_display">
+  💻 Mac Mini External Display (1920x1080 | Desktop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<!-- TVs -->
+<li class="device all tv" data-device="tv_hd">
+  📺 HD TV (1280x720 | TV)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all tv" data-device="tv_fhd">
+  📺 Full HD TV (1920x1080 | TV)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+<li class="device all tv" data-device="tv_uhd">
+  📺 4K UHD TV (3840x2160 | TV)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all tv" data-device="tv_uhd8k">
+  📺 8K UHD TV (7680x4320 | TV)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all tv" data-device="tv_ultrawide">
+  📺 Ultrawide Smart TV (5120x2160 | TV)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+
+
+                <!-- Laptops -->
+                
+<li class="device all laptop" data-device="laptop_l">
+  💻 Laptop-L (1600x900 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all laptop" data-device="laptop_m">
+  💻 Laptop-M (1366x768 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all laptop" data-device="laptop_s">
+  💻 Laptop-S (1280x800 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all laptop" data-device="laptop_xs">
+  💻 Laptop-XS (1024x768 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all laptop" data-device="macbook_air">
+  💻 MacBook Air (1440x900 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all laptop" data-device="macbook">
+  💻 MacBook (2304x1440 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all laptop" data-device="macbook_pro">
+  💻 MacBook Pro (1440x900 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all laptop" data-device="macbook_pro_16_retina">
+  💻 MacBook Pro 16" Retina (3072x1920 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all laptop" data-device="macbook_pro_14_retina">
+  💻 MacBook Pro 14" Retina (3024x1964 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+<li class="device all laptop" data-device="macbook_pro_13_retina">
+  💻 MacBook Pro 13" Retina (2560x1600 | Laptop)
+  <button class="btn" data-action="preview" onclick="simulateDevice(this.parentElement)">Preview</button>
+  <button class="btn" data-action="live" onclick="openDeviceLive(this.parentElement)">Interactive Mode</button>
+</li>
+
+
                         </ul>
                     </div>
                 </div>
@@ -245,7 +987,7 @@
         </div>
     </main>
     <footer>
-        <p>&copy; 2025 FitMyScreen        </p>
+        <p>&copy; 2025 FitMyScreen </p>
     </footer>
     <script src="script.js"></script>
 </body>

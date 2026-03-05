@@ -1,0 +1,82 @@
+<!-- preview.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Device Preview</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: #222;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .device-preview-header {
+      margin-top: 20px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .device-preview-header button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95em;
+      cursor: pointer;
+      background: #444;
+      color: #fff;
+      transition: background 0.2s;
+    }
+    .device-preview-header button.active {
+      background: #e8491d;
+      color: #fff;
+    }
+    .device-frame-box {
+      background: #111;
+      border-radius: 28px;
+      box-shadow: 0 0 20px #000a, 0 0 0 8px #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      padding: 24px;
+      position: relative;
+      max-width: calc(100vw - 40px);
+      max-height: calc(100vh - 140px);
+      overflow: hidden;
+    }
+    .device-label {
+      position: absolute;
+      top: 8px;
+      left: 24px;
+      color: #fff;
+      font-size: 0.95em;
+      opacity: 0.7;
+    }
+    iframe {
+      border: none;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 0 8px #000a;
+    }
+  </style>
+</head>
+<body>
+  <div class="device-preview-header">
+    <button id="portraitBtn" class="active">Portrait</button>
+    <button id="landscapeBtn">Landscape</button>
+    <span class="device-label" id="deviceLabel"></span>
+  </div>
+  <div class="device-frame-box" id="deviceFrameBox">
+    <iframe id="deviceIframe" src=""></iframe>
+  </div>
+  <script src="preview-script.js"></script>
+</body>
+</html>
