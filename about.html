@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MotoVisuals Autoplay Test</title>
+    <title>MotoVisuals Test</title>
 
     <style>
         * {
@@ -16,7 +16,6 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             background: #f5f5f5;
-            color: #222;
         }
 
         header {
@@ -40,10 +39,6 @@
             font-weight: bold;
         }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
-
         h1 {
             text-align: center;
             margin: 30px 0;
@@ -52,56 +47,32 @@
         .wrapper {
             width: 95%;
             max-width: 1800px;
-            margin: 0 auto;
-        }
-
-        .compare {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            align-items: start;
+            margin: auto;
         }
 
         .card {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            padding: 15px;
+            padding: 30px;
+            text-align: center;
         }
 
         .card h2 {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .iframe-container {
-            width: 100%;
-            height: 700px;
-            overflow: hidden;
-        }
-
-        .iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
+            margin-bottom: 20px;
         }
 
         .test-link {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        .test-link a {
             display: inline-block;
             padding: 12px 25px;
             background: #222;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
+            font-weight: bold;
         }
 
-        .test-link a:hover {
+        .test-link:hover {
             background: #444;
         }
 
@@ -111,39 +82,6 @@
             background: #222;
             color: #fff;
             text-align: center;
-        }
-
-        @media (max-width: 1100px) {
-            .compare {
-                grid-template-columns: 1fr;
-            }
-
-            .iframe-container {
-                height: 550px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            header {
-                padding: 15px 20px;
-            }
-
-            nav ul {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            nav li {
-                margin: 5px 10px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            .iframe-container {
-                height: 500px;
-            }
         }
     </style>
 </head>
@@ -168,53 +106,28 @@
         </nav>
     </header>
 
+
     <div class="wrapper">
 
-        <h1>MotoVisuals Autoplay Comparison</h1>
+        <h1>MotoVisuals Test</h1>
 
-        <div class="compare">
+        <div class="card">
 
-            <!-- ============================= -->
-            <!-- AUTOPLAY ENABLED -->
-            <!-- ============================= -->
+            <h2>MotoVisuals API Test</h2>
 
-            <div class="card">
+            <script type="text/javascript">
+                function redirectToVV() {
+                    var host = window.location.host;
 
-                <h2>Autoplay Enabled</h2>
+                    window.open(
+                        "https://psn.motovisuals.com/api/v1/getVehicleInstitute/" + host
+                    );
+                }
+            </script>
 
-                <div class="iframe-container">
-
-                    <iframe
-                        src="https://psn.motovisuals.com/embed/embed_systems.php?useriframeid=6776&domain=ab655a26d84ea326ec529cd8c17f1ff1&tempdomain=ab655a26d84ea326ec529cd8c17f1ff1&animationname=26e99c8617584df333234ba0df192829&businessentityid=RuXwU2HNGMXctRmu1uRUIPua2ntoAa4B45992LfBkv0~"
-                        scrolling="no"
-                        allow="autoplay; fullscreen"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-            </div>
-
-
-            <!-- ============================= -->
-            <!-- AUTOPLAY DISABLED -->
-            <!-- ============================= -->
-
-            <div class="card">
-
-                <h2>Autoplay Disabled</h2>
-
-                <div class="iframe-container">
-
-                    <iframe
-                        src="https://motovisuals.com/embed/embed_single.php?useriframeid=acaa23f71f963e96c8847585e71352d6&userid=2ff9eacbf50ffbd4c01d1737efcb39c8&domain=05f05cf2ff9d9c3e85fb87b3461c98ac&tempdomain=05f05cf2ff9d9c3e85fb87b3461c98ac"
-                        scrolling="no"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-            </div>
+            <a href="javascript:redirectToVV();" class="test-link">
+                MotoVisuals
+            </a>
 
         </div>
 
@@ -224,18 +137,6 @@
     <footer>
         &copy; 2026 My Website | Designed for Web Testers
     </footer>
-
-
-    <script>
-        function redirectToVV() {
-            var host = window.location.host;
-
-            window.open(
-                "https://psn.motovisuals.com/api/v1/getVehicleInstitute/" + host,
-                "_blank"
-            );
-        }
-    </script>
 
 </body>
 </html>
