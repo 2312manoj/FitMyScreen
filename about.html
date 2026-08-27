@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,36 +45,17 @@
             margin: 30px 0;
         }
 
-        .wrapper {
-            width: 95%;
-            max-width: 1800px;
-            margin: auto;
+        /* Iframe container */
+        #vviframe {
+            width: 100%;
+            min-height: 800px;
         }
 
-        .card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            padding: 30px;
-            text-align: center;
-        }
-
-        .card h2 {
-            margin-bottom: 20px;
-        }
-
-        .test-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: #222;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .test-link:hover {
-            background: #444;
+        #vviframe iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            display: block;
         }
 
         footer {
@@ -106,15 +88,18 @@
         </nav>
     </header>
 
-
-   
-<div id="vviframe"><iframe width="100%" height="100%" scrolling="no"  style="border: none;"src='https://india.vehiclevisuals.com/embed/embed_systems.php?useriframeid=6779&domain=ab655a26d84ea326ec529cd8c17f1ff1&tempdomain=ab655a26d84ea326ec529cd8c17f1ff1&animationname=26e99c8617584df333234ba0df192829&businessentityid=bmLFhEl1SoYy1l2i-JJoz66WsKAxrWP0IQLlwu6dwO8~' allowfullscreen></iframe></div>
-        
-
+    <div id="vviframe">
+        <iframe
+            src="https://india.vehiclevisuals.com/embed/embed_systems.php?useriframeid=6779&domain=ab655a26d84ea326ec529cd8c17f1ff1&tempdomain=ab655a26d84ea326ec529cd8c17f1ff1&animationname=26e99c8617584df333234ba0df192829&businessentityid=bmLFhEl1SoYy1l2i-JJoz66WsKAxrWP0IQLlwu6dwO8~"
+            scrolling="no"
+            allowfullscreen>
+        </iframe>
+    </div>
 
     <footer>
         &copy; 2026 My Website | Designed for Web Testers
     </footer>
 
 </body>
+
 </html>
